@@ -9,7 +9,7 @@
 #ifndef XPLOT_CONFIG_CLING_HPP
 #define XPLOT_CONFIG_CLING_HPP
 
-// #pragma cling add_library_path(@XPLOT_INSTALL_LIBRARY_DIR@)
+// #pragma cling add_library_path()
 // #pragma cling load("libxvolume")
 
 #endif

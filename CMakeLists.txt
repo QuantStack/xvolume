@@ -28,19 +28,6 @@ configure_file (
     "${XVOLUME_INCLUDE_DIR}/xvolume/xvolume_config_cling.hpp"
 )
 
-set(MAPFILESPEC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/xvolume/map_data)
-set(XVOLUME_MAPFILESPEC_INSTALL_DIR "share/xvolume" CACHE STRING "install path for map files")
-
-install(DIRECTORY ${MAPFILESPEC_DIR}
-        DESTINATION ${XVOLUME_MAPFILESPEC_INSTALL_DIR})
-
-set(MAPFILE_DIR "\"${CMAKE_INSTALL_PREFIX}/${XVOLUME_MAPFILESPEC_INSTALL_DIR}/map_data/\"")
-
-configure_file (
-    "${XVOLUME_INCLUDE_DIR}/xvolume/xmaps_config.hpp.in"
-    "${XVOLUME_INCLUDE_DIR}/xvolume/xmaps_config.hpp"
-)
-
 # Versionning
 # ===========
 
@@ -84,11 +71,12 @@ set(XVOLUME_HEADERS
     ${XVOLUME_INCLUDE_DIR}/xvolume/xvolume_figure.hpp
     ${XVOLUME_INCLUDE_DIR}/xvolume/xmesh.hpp
     ${XVOLUME_INCLUDE_DIR}/xvolume/xscatter.hpp
+    ${XVOLUME_INCLUDE_DIR}/xvolume/xvolume_utils.hpp
     ${XVOLUME_INCLUDE_DIR}/xvolume/xboxed_container.hpp
 )
 
 set(XVOLUME_SOURCES
-    # ${XVOLUME_SOURCE_DIR}/xaxes.cpp
+    ${XVOLUME_SOURCE_DIR}/xvolume.cpp
 )
 
 # Output

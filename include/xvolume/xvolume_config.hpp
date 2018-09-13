@@ -26,27 +26,14 @@
 #define XVOLUME_VERSION_PATCH 0
 
 // Binary version
-#define XVOLUME_BINARY_CURRENT 1
+#define XVOLUME_BINARY_CURRENT 	0
 #define XVOLUME_BINARY_REVISION 0
-#define XVOLUME_BINARY_AGE 1
+#define XVOLUME_BINARY_AGE 		0
 
-// Semver requirement for ipyvolume
-#define XIPYVOLUME_VERSION_MAJOR 0
-#define XIPYVOLUME_VERSION_MINOR 4
-#define XIPYVOLUME_VERSION_PATCH 5
-
-// Composing the version strings from major, minor and patch
-#define XVOLUME_CONCATENATE(A, B) XVOLUME_CONCATENATE_IMPL(A, B)
-#define XVOLUME_CONCATENATE_IMPL(A, B) A##B
-#define XVOLUME_STRINGIFY(a) XVOLUME_STRINGIFY_IMPL(a)
-#define XVOLUME_STRINGIFY_IMPL(a) #a
-
-#define XIPYVOLUME_VERSION ~XVOLUME_STRINGIFY(XVOLUME_CONCATENATE(XBQPLOT_VERSION_MAJOR,   \
-                    XVOLUME_CONCATENATE(.,XVOLUME_CONCATENATE(XBQPLOT_VERSION_MINOR,      \
-                                      XVOLUME_CONCATENATE(.,XBQPLOT_VERSION_PATCH)))))
+#define XIPYVOLUME_VERSION "~0.4.5"
 
 #ifdef __CLING__
-#include "xplot_config_cling.hpp"
+	#include "xvolume_config_cling.hpp"
 #endif
 
 #endif

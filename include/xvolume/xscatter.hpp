@@ -20,6 +20,10 @@
 #include "xwidgets/xmaterialize.hpp"
 #include "xwidgets/xobject.hpp"
 
+
+#include "xvolume_config.hpp"
+#include "xvolume_utils.hpp"
+
 namespace xvl
 {
     /***********************
@@ -142,8 +146,8 @@ namespace xvl
         this->_model_module() = "ipyvolume";
         this->_view_module() = "ipyvolume";
         // TODO remove hardcoded version string here!
-        this->_model_module_version() = "~0.4.5";
-        this->_view_module_version() = "~0.4.5";
+        this->_model_module_version() = XIPYVOLUME_VERSION;
+        this->_view_module_version() = XIPYVOLUME_VERSION;
 
         this->material() = xthree::shader_material();
         this->line_material() = xthree::shader_material();
@@ -153,45 +157,38 @@ namespace xvl
     inline const std::vector<xw::xjson_path_type>& xscatter<D>::buffer_paths() const
     {
         static const std::vector<xw::xjson_path_type> default_buffer_paths = {
-            {"x", "0", "buffer"}, 
-            {"y", "0", "buffer"}, 
+            {"x", "0", "buffer"},
+            {"y", "0", "buffer"},
             {"z", "0", "buffer"}
         };
         return default_buffer_paths;
-    }
-
-    template <class T>
-    inline void set_patch_from_array(const T& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
-    {
-        patch[property.name()] = {{
-            {"shape", std::array<size_t, 1>{ property().size() }},
-            {"dtype", "float32"},
-            {"buffer", xw::xbuffer_reference_prefix() + std::to_string(buffers.size())}
-        }};
-        buffers.emplace_back(property().data(), sizeof(double) * property().size());
-
     }
 
     inline void set_patch_from_property(const decltype(scatter::x)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     {
         set_patch_from_array(property, patch, buffers);
     }
+
     inline void set_patch_from_property(const decltype(scatter::y)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     {
         set_patch_from_array(property, patch, buffers);
     }
+
     inline void set_patch_from_property(const decltype(scatter::z)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     {
         set_patch_from_array(property, patch, buffers);
     }
+
     // inline void set_patch_from_property(const decltype(scatter::vx)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     // {
     //     set_patch_from_array(property, patch, buffers);
     // }
+
     // inline void set_patch_from_property(const decltype(scatter::vz)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     // {
     //     set_patch_from_array(property, patch, buffers);
     // }
+
     // inline void set_patch_from_property(const decltype(scatter::selected)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     // {
     //     set_patch_from_array(property, patch, buffers);

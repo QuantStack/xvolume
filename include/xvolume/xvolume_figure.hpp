@@ -25,8 +25,11 @@
 #include "xwidgets/xeither.hpp"
 #include "xwidgets/xwidget.hpp"
 
+#include "xvolume_config.hpp"
+
 #include "xscatter.hpp"
 #include "xmesh.hpp"
+
 #include "xboxed_container.hpp"
 
 namespace xvl
@@ -134,8 +137,8 @@ namespace xvl
         this->_model_name() = "FigureModel";
 
         // TODO remove hardcoded version string here!
-        this->_model_module_version() = "~0.4.5";
-        this->_view_module_version() = "~0.4.5";
+        this->_model_module_version() = XIPYVOLUME_VERSION;
+        this->_view_module_version() = XIPYVOLUME_VERSION;
 
 
         this->style() = {
