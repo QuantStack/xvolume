@@ -15,7 +15,9 @@
 
 #include "xtl/xoptional.hpp"
 
+#ifdef XTHREE_SHADER_MATERIAL_HPP
 #include "xthreejs/materials/xshader_material_autogen.hpp"
+#endif
 
 #include "xwidgets/xmaterialize.hpp"
 #include "xwidgets/xobject.hpp"
@@ -62,9 +64,10 @@ namespace xvl
         // Note: this is a Union in ipywidgets
         XPROPERTY(std::string, derived_type, texture);
 
+        #ifdef XTHREE_SHADER_MATERIAL_HPP
         XPROPERTY(xthree::shader_material, derived_type, material);
         XPROPERTY(xthree::shader_material, derived_type, line_material);
-
+        #endif
     protected:
 
         xscatter();
@@ -149,8 +152,10 @@ namespace xvl
         this->_model_module_version() = XIPYVOLUME_VERSION;
         this->_view_module_version() = XIPYVOLUME_VERSION;
 
+        #ifdef XTHREE_SHADER_MATERIAL_HPP
         this->material() = xthree::shader_material();
         this->line_material() = xthree::shader_material();
+        #endif
     }
 
     template <class D>
