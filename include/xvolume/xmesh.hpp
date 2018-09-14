@@ -31,7 +31,7 @@ namespace xvl
     public:
 
         using vector_type = std::vector<float>;
-        using vector_type_indices = std::vector<unsigned int>;
+        using vector_type_indices = std::vector<uint32_t>;
 
         using base_type = xw::xobject<D>;
         using derived_type = D;
@@ -161,11 +161,11 @@ namespace xvl
     }
     inline void set_patch_from_property(const decltype(mesh::triangles)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     {
-        set_patch_from_array_uint32(property, patch, buffers);
+        set_patch_from_array(property, patch, buffers);
     }
     inline void set_patch_from_property(const decltype(mesh::lines)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     {
-        set_patch_from_array_uint32(property, patch, buffers);
+        set_patch_from_array(property, patch, buffers);
     }
 
     template <class F>

@@ -11,6 +11,7 @@
 #define XVOLUME_UTILS_HPP
 
 #include "xeus/xjson.hpp"
+#include <typeindex>
 
 namespace xvl
 {
@@ -18,25 +19,30 @@ namespace xvl
      * helpers *
      ***********/
 
+    // TODO migrate this somewhere xwidgets like
+    std::unordered_map<std::type_index, std::string> dtype_to_string({
+        {std::type_index(typeid(int32_t)), "int32"},
+        {std::type_index(typeid(uint32_t)), "uint32"},
+        {std::type_index(typeid(float)), "float32"},
+        {std::type_index(typeid(double)), "float64"}
+    });
+
     template <class T>
     inline void set_patch_from_array(const T& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
     {
-        patch[property.name()] = {{
-            {"shape", std::array<size_t, 1>{ property().size() }},
-            {"dtype", "float32"},
-            {"data", xw::xbuffer_reference_prefix() + std::to_string(buffers.size())}
-        }};
-        buffers.emplace_back(property().data(), sizeof(float) * property().size());
-    }
-    template <class T>
-    inline void set_patch_from_array_uint32(const T& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
-    {
-        patch[property.name()] = {{
-            {"shape", std::array<size_t, 1>{ property().size() }},
-            {"dtype", "uint32"},
-            {"data", xw::xbuffer_reference_prefix() + std::to_string(buffers.size())}
-        }};
-        buffers.emplace_back(property().data(), sizeof(int) * property().size());
+        using value_type = decltype(property().data()[0]);
+        std::string dtype = dtype_to_string[std::type_index(typeid(value_type))];
+
+        if (property().size())
+        {
+            patch[property.name()] = {{
+                {"shape", std::array<size_t, 1>{ property().size() }},
+                {"dtype", dtype},
+                {"data", xw::xbuffer_reference_prefix() + std::to_string(buffers.size())}
+            }};
+
+            buffers.emplace_back(property().data(), sizeof(value_type) * property().size());
+        }
     }
 
     unsigned int index_from_2d(unsigned int nx, unsigned int ny, unsigned int x_index, unsigned int y_index)
