@@ -167,6 +167,31 @@ namespace xvl
     {
         set_patch_from_array_uint32(property, patch, buffers);
     }
+
+    template <class F>
+    void fill_mesh(mesh& m, F f, std::array<unsigned int, 2> shape, std::array<float,2> xrange, std::array<float,2> yrange,
+        bool lines=false, bool wrapx=false, bool wrapy=false) {
+        m.triangles = generate_triangles(shape, wrapx, wrapy);
+        m.lines = generate_lines(shape, wrapx, wrapy);
+        unsigned int nx = shape[0];
+        unsigned int ny = shape[1];
+        unsigned int n = nx * ny;
+        std::vector<float> x((size_t)n), y((size_t)n), z((size_t)n);
+        for(int i = 0; i < nx; i++) {
+            for(int j = 0; j < ny; j++) {
+                float x_value = xrange[0] + (xrange[1] - xrange[0]) * i / (nx-1);
+                float y_value = yrange[0] + (yrange[1] - yrange[0]) * j / (ny-1);
+                float z_value = f(x_value, y_value);
+                x[i * ny + j] = x_value;
+                y[i * ny + j] = y_value;
+                z[i * ny + j] = z_value;
+            }
+        }
+        m.x = x;
+        m.y = y;
+        m.z = z;
+    }
+
 }
 
 
