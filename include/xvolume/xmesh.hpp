@@ -31,6 +31,7 @@ namespace xvl
     public:
 
         using vector_type = std::vector<float>;
+        using vector_type_indices = std::vector<unsigned int>;
 
         using base_type = xw::xobject<D>;
         using derived_type = D;
@@ -42,11 +43,13 @@ namespace xvl
         XPROPERTY(vector_type, derived_type, x);
         XPROPERTY(vector_type, derived_type, y);
         XPROPERTY(vector_type, derived_type, z);
-        XPROPERTY(vector_type, derived_type, u);
-        XPROPERTY(vector_type, derived_type, v);
-        XPROPERTY(vector_type, derived_type, triangles);
-        XPROPERTY(vector_type, derived_type, lines);
-        XPROPERTY(vector_type, derived_type, color);
+        // jupyter-volume does not like u and v to me empty lists
+        // XPROPERTY(vector_type, derived_type, u);
+        // XPROPERTY(vector_type, derived_type, v);
+        XPROPERTY(vector_type_indices, derived_type, triangles);
+        XPROPERTY(vector_type_indices, derived_type, lines);
+        // should be a string or array, lets keep it simple first
+        XPROPERTY(std::string, derived_type, color, "red");
 
         XPROPERTY(int, derived_type, sequence_index, 0);
         XPROPERTY(bool, derived_type, visible, true);
@@ -80,8 +83,8 @@ namespace xvl
         set_patch_from_property(x, state, buffers);
         set_patch_from_property(y, state, buffers);
         set_patch_from_property(z, state, buffers);
-        set_patch_from_property(u, state, buffers);
-        set_patch_from_property(v, state, buffers);
+        // set_patch_from_property(u, state, buffers);
+        // set_patch_from_property(v, state, buffers);
         set_patch_from_property(triangles, state, buffers);
         set_patch_from_property(lines, state, buffers);
         set_patch_from_property(color, state, buffers);
@@ -100,8 +103,8 @@ namespace xvl
         set_property_from_patch(x, patch, buffers);
         set_property_from_patch(y, patch, buffers);
         set_property_from_patch(z, patch, buffers);
-        set_property_from_patch(u, patch, buffers);
-        set_property_from_patch(v, patch, buffers);
+        // set_property_from_patch(u, patch, buffers);
+        // set_property_from_patch(v, patch, buffers);
         set_property_from_patch(triangles, patch, buffers);
         set_property_from_patch(lines, patch, buffers);
         set_property_from_patch(color, patch, buffers);
@@ -133,9 +136,11 @@ namespace xvl
     inline const std::vector<xw::xjson_path_type>& xmesh<D>::buffer_paths() const
     {
         static const std::vector<xw::xjson_path_type> default_buffer_paths = {
-            {"x", "0", "buffer"},
-            {"y", "0", "buffer"},
-            {"z", "0", "buffer"}
+            {"x", "0", "data"},
+            {"y", "0", "data"},
+            {"z", "0", "data"},
+            {"triangles", "0", "data"},
+            {"lines", "0", "data"}
         };
         return default_buffer_paths;
     }
@@ -154,7 +159,17 @@ namespace xvl
     {
         set_patch_from_array(property, patch, buffers);
     }
+    inline void set_patch_from_property(const decltype(mesh::triangles)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
+    {
+        set_patch_from_array_uint32(property, patch, buffers);
+    }
+    inline void set_patch_from_property(const decltype(mesh::lines)& property, xeus::xjson& patch, xeus::buffer_sequence& buffers)
+    {
+        set_patch_from_array_uint32(property, patch, buffers);
+    }
 }
+
+
 
 /*********************
  * precompiled types *

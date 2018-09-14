@@ -30,7 +30,7 @@
 #define XVOLUME_BINARY_REVISION 0
 #define XVOLUME_BINARY_AGE 		0
 
-#define XIPYVOLUME_VERSION "~0.4.5"
+#define XIPYVOLUME_VERSION "~0.5.2-dev"
 
 #ifdef __CLING__
 	#include "xvolume_config_cling.hpp"

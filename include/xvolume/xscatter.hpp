@@ -157,9 +157,9 @@ namespace xvl
     inline const std::vector<xw::xjson_path_type>& xscatter<D>::buffer_paths() const
     {
         static const std::vector<xw::xjson_path_type> default_buffer_paths = {
-            {"x", "0", "buffer"},
-            {"y", "0", "buffer"},
-            {"z", "0", "buffer"}
+            {"x", "0", "data"},
+            {"y", "0", "data"},
+            {"z", "0", "data"}
         };
         return default_buffer_paths;
     }
