@@ -19,8 +19,12 @@
 #include "xtl/xoptional.hpp"
 
 // xthreejs stuff
+#ifdef XTHREE_CAMERA_HPP
 #include "xthreejs/cameras/xperspective_camera_autogen.hpp"
+#endif
+#ifdef XTHREE_SCENE_HPP
 #include "xthreejs/scenes/xscene_autogen.hpp"
+#endif
 
 #include "xwidgets/xeither.hpp"
 #include "xwidgets/xwidget.hpp"
@@ -79,8 +83,13 @@ namespace xvl
 
         XPROPERTY(camera_position_type, derived_type, camera_center);
 
+        #ifdef XTHREE_CAMERA_HPP
         XPROPERTY(xthree::perspective_camera, derived_type, camera);
+        #endif
+
+        #ifdef XTHREE_SCENE_HPP
         XPROPERTY(xthree::scene, derived_type, scene);
+        #endif
 
         XPROPERTY(int, derived_type, width, 500);
         XPROPERTY(int, derived_type, height, 400);
@@ -162,13 +171,17 @@ namespace xvl
         this->xlim() = std::array<double, 2>{0, 1};
         this->ylim() = std::array<double, 2>{0, 1};
         this->zlim() = std::array<double, 2>{0, 1};
+        #ifdef XTHREE_CAMERA_HPP
         this->camera() = xthree::perspective_camera_generator()
             .fov(46)
             .position({0, 0, 2})
             .finalize();
+        #endif
+        #ifdef XTHREE_SCENE_HPP
         this->scene() = xthree::scene_generator()
             .background(xtl::missing<xw::html_color>())
             .finalize();
+        #endif
     }
 
     template <class D>
