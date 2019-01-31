@@ -118,7 +118,7 @@ namespace xvl
         XPROPERTY(std::string, derived_type, selector, "lasso");
         XPROPERTY(std::string, derived_type, selection_mode, "replace");
         XPROPERTY(std::string, derived_type, mouse_mode, "normal");
-        XPROPERTY(std::string, derived_type, panorama_mode, "normal", XEITHER("no", "360", "180"));
+        XPROPERTY(std::string, derived_type, panorama_mode, "no", XEITHER("no", "360", "180"));
 
     protected:
 
