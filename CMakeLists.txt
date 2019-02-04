@@ -60,9 +60,9 @@ message(STATUS "xvolume binary version: v${XVOLUME_BINARY_VERSION}")
 # ============
 
 find_package(cppzmq 4.3.0 REQUIRED)
-find_package(xtl 0.4 REQUIRED)
-find_package(xeus 0.14.1 REQUIRED)
-find_package(xwidgets 0.13.1 REQUIRED)
+find_package(xtl 0.5 REQUIRED)
+find_package(xeus 0.18.1 REQUIRED)
+find_package(xwidgets 0.16.1 REQUIRED)
 
 # Source files
 # ============

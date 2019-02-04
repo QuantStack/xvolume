@@ -10,8 +10,12 @@
 #ifndef XVOLUME_UTILS_HPP
 #define XVOLUME_UTILS_HPP
 
-#include "xeus/xjson.hpp"
+#include <array>
+#include <string>
 #include <typeindex>
+#include <vector>
+
+#include "xeus/xjson.hpp"
 
 namespace xvl
 {

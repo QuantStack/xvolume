@@ -6,8 +6,8 @@
 * The full license is in the file LICENSE, distributed with this software. *
 ****************************************************************************/
 
-#ifndef XBOXED_CONTAINER_HPP
-#define XBOXED_CONTAINER_HPP
+#ifndef XVOLUME_BOXED_CONTAINER_HPP
+#define XVOLUME_BOXED_CONTAINER_HPP
 
 #include <string>
 

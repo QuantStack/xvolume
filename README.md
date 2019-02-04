@@ -21,9 +21,9 @@ make install
 
 All the dependencies of xvolume are available for the conda package manager.
 
-| `xvolume` | `xwidgets`    |  `xeus`         |
-|-----------|---------------|-----------------|
-|   master  | >=0.14.0<0.15 | >=0.15.0<0.16   |
+| `xvolume` | `xwidgets`    |  `xeus`       |
+|-----------|---------------|---------------|
+|   master  | >=0.16.1<0.17 | >=0.18.1<0.19 |
 
 ## License
 
