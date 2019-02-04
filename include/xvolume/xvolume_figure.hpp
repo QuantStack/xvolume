@@ -144,11 +144,8 @@ namespace xvl
         this->_view_module() = "ipyvolume";
         this->_model_module() = "ipyvolume";
         this->_model_name() = "FigureModel";
-
-        // TODO remove hardcoded version string here!
-        this->_model_module_version() = XIPYVOLUME_VERSION;
-        this->_view_module_version() = XIPYVOLUME_VERSION;
-
+        this->_model_module_version() = jupyter_volume_semver();
+        this->_view_module_version() = jupyter_volume_semver();
 
         this->style() = {
             {"background-color", "white"},
